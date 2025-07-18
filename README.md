@@ -13,7 +13,7 @@ A digital health solution for Ghana – book doctor appointments and chat online
 - Firebase Auth, Firestore, Hosting
 
 ## 🔗 Live Site
-https://eclinic-gh.web.app
+https://yourproject.web.app
 
 ## 📸 Screenshots
 _Add your screenshots here_
