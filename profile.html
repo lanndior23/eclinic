@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile - eClinic</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="profile-bg">
+  <div class="overlay">
+    <div class="form-container">
+      <h2>Your Profile</h2>
+      <div id="user-info">
+        <p><strong>Name:</strong> <span id="user-name"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+      </div>
+
+      <button id="reset-password">Reset Password</button>
+      <button id="logout">Logout</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module">
+    import { auth } from './js/firebase-config.js';
+    import {
+      onAuthStateChanged,
+      sendPasswordResetEmail,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const userName = document.getElementById("user-name");
+    const userEmail = document.getElementById("user-email");
+    const resetBtn = document.getElementById("reset-password");
+    const logoutBtn = document.getElementById("logout");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userName.textContent = user.displayName || "N/A";
+        userEmail.textContent = user.email;
+      } else {
+        alert("Please login to view your profile.");
+        window.location.href = "login.html";
+      }
+    });
+
+    resetBtn.addEventListener("click", async () => {
+      const user = auth.currentUser;
+      if (user) {
+        await sendPasswordResetEmail(auth, user.email);
+        alert("Reset link sent to your email.");
+      }
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+</html>

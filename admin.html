@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - eClinic</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-bg">
+  <div class="overlay">
+    <div class="dashboard-container">
+      <h2>Admin Dashboard</h2>
+      <div id="appointments">
+        <h3>Appointments</h3>
+        <table id="appointments-table">
+          <thead>
+            <tr>
+              <th>Name</th><th>Email</th><th>Doctor</th><th>Date</th><th>Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div id="chat-history">
+        <h3>Chat History</h3>
+        <div id="chat-logs"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module">
+    import { db, auth } from './js/firebase-config.js';
+    import {
+      collection, getDocs, query, orderBy
+    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const appointmentsBody = document.querySelector("#appointments-table tbody");
+    const chatLogs = document.getElementById("chat-logs");
+
+    const adminEmail = "admin@eclinic.com"; // Set your admin email
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user && user.email === adminEmail) {
+        loadAppointments();
+        loadChatLogs();
+      } else {
+        alert("Access denied. Admins only.");
+        window.location.href = "index.html";
+      }
+    });
+
+    async function loadAppointments() {
+      const q = query(collection(db, "appointments"));
+      const snapshot = await getDocs(q);
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${data.fullname}</td>
+          <td>${data.email}</td>
+          <td>${data.doctor}</td>
+          <td>${data.date}</td>
+          <td>${data.time}</td>
+        `;
+        appointmentsBody.appendChild(row);
+      });
+    }
+
+    async function loadChatLogs() {
+      const q = query(collection(db, "chats"), orderBy("timestamp"));
+      const snapshot = await getDocs(q);
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const msg = document.createElement("div");
+        msg.className = "chat-message";
+        msg.innerHTML = `<strong>${data.sender}:</strong> ${data.message}`;
+        chatLogs.appendChild(msg);
+      });
+    }
+  </script>
+</body>
+</html>

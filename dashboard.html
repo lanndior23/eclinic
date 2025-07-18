@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>eClinic Dashboard</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="dashboard-bg">
+  <div class="overlay">
+    <div class="dashboard-container">
+      <img src="/assets/medicine-logo.png" alt="Clinic Logo" class="logo-small" />
+      <h2>Welcome to Health eClinic Ghana</h2>
+      <p id="user-email" class="email-text"></p>
+
+      <div class="nav-buttons">
+        <a href="appointment.html" class="card">📅 Book Appointment</a>
+        <a href="chat.html" class="card">💬 Doctor Chat</a>
+        <a href="articles.html" class="card">📖 Health Articles</a>
+      </div>
+
+      <button onclick="logout()" class="logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module">
+    import { auth } from './js/firebase-config.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const emailText = document.getElementById('user-email');
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        emailText.textContent = `Logged in as: ${user.email}`;
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    window.logout = async function () {
+      await signOut(auth);
+      alert("You have logged out.");
+      window.location.href = "index.html";
+    };
+  </script>
+</body>
+</html>

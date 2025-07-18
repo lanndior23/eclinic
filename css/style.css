@@ -1,0 +1,350 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    /* BACKGROUND IMAGE */
+    body.auth-bg {
+      background: url('/assets/hos.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* OVERLAY WITH BLUR AND TINT */
+    .overlay {
+      background: rgba(0, 0, 0, 0.4); /* Dark tint */
+      backdrop-filter: blur(2px); /* Glass effect */
+      -webkit-backdrop-filter: blur(2px); /* Safari */
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s ease-in-out;
+    }
+
+    /* AUTH CONTAINER */
+    .auth-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      width: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .auth-container h1 {
+      color: #0077b6;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+
+    .banner {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .button-group {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: #0077b6;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #005f87;
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+
+    /* DASHBOARD STYLES */
+.dashboard-bg {
+  background: url('../assets/doc.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.dashboard-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 4rem auto;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.logo-small {
+  width: 50px;
+  margin-bottom: 1rem;
+}
+
+.email-text {
+  color: #333;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #0077b6;
+  color: white;
+  padding: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.card:hover {
+  background-color: #005f87;
+}
+
+.logout-btn {
+  background-color: crimson;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* APPOINTMENT PAGE STYLES */
+.appointment-bg {
+  background: url('../assets/doc.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 4rem auto;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+form input,
+form select,
+form textarea,
+form button {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+form button {
+  background-color: #0077b6;
+  color: white;
+  font-weight: bold;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background-color: #005f87;
+}
+
+.msg {
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* CHAT PAGE STYLES */
+.chat-bg {
+  background: url('../assets/chat.webp') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.chat-container {
+  background-color: rgba(255, 255, 255, 0.97);
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+#chat-box {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  margin-bottom: 1rem;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.your-msg {
+  background-color: #d1f7ff;
+  text-align: right;
+}
+
+.doctor-msg {
+  background-color: #e9ffe1;
+  text-align: left;
+}
+
+#chat-form {
+  display: flex;
+  gap: 10px;
+}
+
+#chat-form input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+#chat-form button {
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#chat-form button:hover {
+  background-color: #005f87;
+}
+
+/* ADMIN DASHBOARD STYLES */
+.admin-bg {
+  background: url('../assets/admin.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.dashboard-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.2);
+}
+
+#appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+#appointments-table th,
+#appointments-table td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#appointments-table th {
+  background-color: #0077b6;
+  color: white;
+}
+
+#chat-logs {
+  max-height: 300px;
+  overflow-y: scroll;
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+/* PROFILE PAGE STYLES */
+.profile-bg {
+  background: url('../assets/profile.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+#user-info {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+#reset-password, #logout {
+  background-color: #023e8a;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  margin-right: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#reset-password:hover, #logout:hover {
+  background-color: #0077b6;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Appointment - eClinic</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="appointment-bg">
+  <div class="overlay">
+    <div class="form-container">
+      <h2>Book an Appointment</h2>
+      <form id="appointmentForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <input type="datetime-local" id="datetime" required />
+        <select id="doctor" required>
+          <option value="" disabled selected>Select Doctor</option>
+          <option value="Dr. Kofi Mensah">Dr. Kofi Mensah</option>
+          <option value="Dr. Ama Serwaa">Dr. Ama Serwaa</option>
+          <option value="Dr. Kwame Boakye">Dr. Kwame Boakye</option>
+        </select>
+        <textarea id="symptoms" placeholder="Symptoms or Message" required></textarea>
+        <button type="submit">Submit Appointment</button>
+        <p id="form-message" class="msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module">
+    import { db, auth } from './js/firebase-config.js';
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const form = document.getElementById("appointmentForm");
+    const msg = document.getElementById("form-message");
+
+    let currentUser;
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        document.getElementById('email').value = user.email;
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const datetime = document.getElementById("datetime").value;
+      const doctor = document.getElementById("doctor").value;
+      const symptoms = document.getElementById("symptoms").value;
+
+      try {
+        await addDoc(collection(db, "appointments"), {
+          uid: currentUser.uid,
+          name,
+          email,
+          datetime,
+          doctor,
+          symptoms,
+          createdAt: serverTimestamp()
+        });
+
+        msg.textContent = "✅ Appointment booked successfully!";
+        msg.style.color = "green";
+        form.reset();
+      } catch (error) {
+        msg.textContent = "❌ Error booking appointment.";
+        msg.style.color = "red";
+        console.error("Error adding appointment:", error);
+      }
+    });
+  </script>
+</body>
+</html>

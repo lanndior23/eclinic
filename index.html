@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health eClinic Ghana – Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="auth-bg">
+  <div class="overlay">
+    <div class="auth-container">
+      <img src="/assets/medicine-logo.png" alt="eClinic Logo" class="logo" />
+      <h1>Health eClinic Ghana</h1>
+      <p class="tagline">Access quality healthcare remotely with ease</p>
+
+      <img src="/assets/Doctor-logo.png" alt="Doctor" class="banner" />
+
+      <input type="email" id="email" placeholder="Enter your email" />
+      <input type="password" id="password" placeholder="Enter your password" />
+
+      <div class="button-group">
+        <button id="loginBtn">Login</button>
+        <button id="registerBtn">Register</button>
+      </div>
+
+      <p id="error-message" class="error"></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth } from "./js/firebase-config.js";
+    import {
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const errorMsg = document.getElementById("error-message");
+
+    loginBtn.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      errorMsg.textContent = "";
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        errorMsg.textContent = error.message;
+        console.error("Login failed:", error);
+      }
+    });
+
+    registerBtn.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      errorMsg.textContent = "";
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        errorMsg.textContent = error.message;
+        console.error("Registration failed:", error);
+      }
+    });
+  </script>
+</body>
+</html>
