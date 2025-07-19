@@ -7,26 +7,25 @@
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body class="appointment-bg">
-  <div class="overlay">
-    <div class="form-container">
-      <h2>Book an Appointment</h2>
-      <form id="appointmentForm">
-        <input type="text" id="name" placeholder="Full Name" required />
-        <input type="email" id="email" placeholder="Email Address" required />
-        <input type="datetime-local" id="datetime" required />
-        <select id="doctor" required>
-          <option value="" disabled selected>Select Doctor</option>
-          <option value="Dr. Kofi Mensah">Dr. Kofi Mensah</option>
-          <option value="Dr. Ama Serwaa">Dr. Ama Serwaa</option>
-          <option value="Dr. Kwame Boakye">Dr. Kwame Boakye</option>
-          <option value="Dr. Kwame Boakye">Dr. William Amoah</option>
-          <option value="Dr. Kwame Boakye">Dr. Abigail Mensah</option>
-        </select>
-        <textarea id="symptoms" placeholder="Symptoms or Message" required></textarea>
-        <button type="submit">Submit Appointment</button>
-        <p id="form-message" class="msg"></p>
-      </form>
-    </div>
+
+  <div class="form-container">
+    <h2>Book an Appointment</h2>
+    <form id="appointmentForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="datetime-local" id="datetime" required />
+      <select id="doctor" required>
+        <option value="" disabled selected>Select Doctor</option>
+        <option value="Dr. Kofi Mensah">Dr. Kofi Mensah</option>
+        <option value="Dr. Ama Serwaa">Dr. Ama Serwaa</option>
+        <option value="Dr. Kwame Boakye">Dr. Kwame Boakye</option>
+        <option value="Dr. William Amoah">Dr. William Amoah</option>
+        <option value="Dr. Abigail Mensah">Dr. Abigail Mensah</option>
+      </select>
+      <textarea id="symptoms" placeholder="Symptoms or Message" required></textarea>
+      <button type="submit">Submit Appointment</button>
+      <p id="form-message" class="msg"></p>
+    </form>
   </div>
 
   <script type="module" src="js/firebase-config.js"></script>
@@ -37,7 +36,6 @@
 
     const form = document.getElementById("appointmentForm");
     const msg = document.getElementById("form-message");
-
     let currentUser;
 
     onAuthStateChanged(auth, (user) => {
@@ -51,7 +49,6 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
       const datetime = document.getElementById("datetime").value;

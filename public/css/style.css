@@ -168,19 +168,30 @@
 
 /* APPOINTMENT PAGE STYLES */
 .appointment-bg {
-  background: url	url("/assets/doctor.jpg") no-repeat center center fixed;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.4), 
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("/assets/doctor.jpg") no-repeat center center fixed;
   background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Form Styling */
 .form-container {
-  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.85); /* Light and clean without full transparency */
   padding: 2rem;
+  width: 90%;
   max-width: 500px;
-  margin: 4rem auto;
   border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Form Fields */
 form input,
 form select,
 form textarea,
@@ -193,6 +204,7 @@ form button {
   border-radius: 8px;
 }
 
+/* Submit Button */
 form button {
   background-color: #0077b6;
   color: white;
@@ -205,11 +217,13 @@ form button:hover {
   background-color: #005f87;
 }
 
+/* Optional Message Styling */
 .msg {
   font-size: 0.95rem;
   font-weight: bold;
   margin-top: 10px;
 }
+
 
 /* CHAT PAGE BACKGROUND */
 .chat-bg {
