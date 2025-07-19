@@ -11,7 +11,7 @@
 
     /* BACKGROUND IMAGE */
     body.auth-bg {
-      background: urlurl('/assets/hos.jpg') no-repeat center center fixed;
+      background: urlurl("/assets/hos.jpg") no-repeat center center fixed;
       background-size: cover;
     }
 
@@ -110,7 +110,7 @@
 
     /* DASHBOARD STYLES */
 .dashboard-bg {
-  background: url('/assets/doc.jpg') no-repeat center center fixed;
+  background: url("/assets/doc.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
