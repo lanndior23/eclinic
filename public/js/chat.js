@@ -51,6 +51,7 @@ chatForm.addEventListener("submit", async (e) => {
     timestamp: serverTimestamp()
   });
 
+  // Simulated doctor response
   setTimeout(() => {
     addDoc(collection(db, "chats"), {
       sender: "Dr. Bot",
