@@ -213,7 +213,7 @@ form button:hover {
 
 /* CHAT PAGE STYLES */
 .chat-bg {
-  background-image: url("/assets/chat.webp") no-repeat center center fixed;
+  background-image: url("/assets/chat.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
