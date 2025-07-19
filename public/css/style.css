@@ -11,7 +11,7 @@
 
     /* BACKGROUND IMAGE */
     body.auth-bg {
-      background: urlurl("/assets/prof.jpg") no-repeat center center fixed;
+      background: urlurl("/assets/hos.jpg") no-repeat center center fixed;
       background-size: cover;
     }
 
@@ -168,7 +168,7 @@
 
 /* APPOINTMENT PAGE STYLES */
 .appointment-bg {
-  background: url	url("/assets/prof.jpg") no-repeat center center fixed;
+  background: url	url("/assets/doctor.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
