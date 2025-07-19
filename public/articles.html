@@ -5,30 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Health Articles – Health eClinic Ghana</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/Doctor-logo.png" type="image/png" />
+
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url("/assets/article.jpeg") no-repeat center center fixed;
+      background: url("assets/article.jpeg") no-repeat center center fixed;
       background-size: cover;
       color: #023e8a;
     }
 
     .overlay {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 3rem;
+      background-color: rgba(255, 255, 255, 0.92);
+      padding: 3rem 1rem;
       min-height: 100vh;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: auto;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       color: #0077b6;
     }
 
@@ -37,8 +39,14 @@
       border-left: 6px solid #00b4d8;
       padding: 1.5rem;
       margin-bottom: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .article:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
     .article h2 {
@@ -47,18 +55,28 @@
     }
 
     .article p {
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 1rem;
     }
 
     .article a {
+      display: inline-block;
+      margin-top: 0.5rem;
       color: #023e8a;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .article a:hover {
+      color: #0077b6;
       text-decoration: underline;
     }
 
     .footer {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 3rem;
       color: #555;
+      font-size: 0.95rem;
     }
   </style>
 </head>
@@ -95,6 +113,18 @@
         <h2>5. Vaccinations: Protecting Yourself & Others</h2>
         <p>Vaccines are a safe and effective way to protect against serious diseases. Stay up to date with your immunization schedule for your age group.</p>
         <a href="https://www.who.int/health-topics/vaccines-and-immunization" target="_blank">Read more</a>
+      </div>
+
+      <div class="article">
+        <h2>6. Understanding Hypertension in Ghana</h2>
+        <p>High blood pressure is a growing health concern in Ghana. Learn the risk factors, signs, and how to manage it through lifestyle changes and regular monitoring.</p>
+        <a href="https://www.ahajournals.org/journal/hypertension" target="_blank">Read more</a>
+      </div>
+
+      <div class="article">
+        <h2>7. Maternal Health and Safe Delivery</h2>
+        <p>Maternal health is crucial for both mother and baby. Regular antenatal visits, good nutrition, and skilled delivery care reduce the risks of complications.</p>
+        <a href="https://www.unicef.org/ghana/what-we-do/maternal-health" target="_blank">Read more</a>
       </div>
 
       <p class="footer">Powered by Health eClinic Ghana</p>
