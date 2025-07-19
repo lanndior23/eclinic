@@ -211,31 +211,53 @@ form button:hover {
   margin-top: 10px;
 }
 
-/* CHAT PAGE STYLES */
+/* CHAT PAGE BACKGROUND */
 .chat-bg {
-  background-image: url("/assets/chat.jpg") no-repeat center center fixed;
+  position: relative;
+  min-height: 100vh;
+  background: url("/assets/chat.webp") no-repeat center center fixed;
   background-size: cover;
+  overflow: hidden;
 }
 
+/* Optional dark overlay */
+.chat-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
+  z-index: 0;
+}
+
+/* CHAT CONTAINER - GLASSMORPHISM STYLE */
 .chat-container {
-  background-color: rgba(255, 255, 255, 0.97);
+  position: relative;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   max-width: 600px;
-  margin: 4rem auto;
+  margin: 5rem auto;
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* CHAT BOX */
 #chat-box {
   height: 300px;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 10px;
-  background-color: #f8f8f8;
+  background-color: #ffffffee;
   margin-bottom: 1rem;
 }
 
+/* MESSAGE STYLES */
 .chat-message {
   margin-bottom: 10px;
   padding: 10px;
@@ -252,6 +274,7 @@ form button:hover {
   text-align: left;
 }
 
+/* CHAT FORM */
 #chat-form {
   display: flex;
   gap: 10px;
@@ -261,6 +284,8 @@ form button:hover {
   flex: 1;
   padding: 10px;
   font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 #chat-form button {
@@ -271,11 +296,13 @@ form button:hover {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 #chat-form button:hover {
   background-color: #005f87;
 }
+
 
 /* ADMIN DASHBOARD STYLES */
 .admin-bg {
