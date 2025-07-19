@@ -16,12 +16,13 @@
       <img src="/assets/Doctor-logo.png" alt="Doctor" class="banner" />
 
        <input type="username" id="username" placeholder="Enter your username" />
+      <input type="text" id="name" placeholder="Full Name" required />
       <input type="email" id="email" placeholder="Enter your email" />
       <input type="password" id="password" placeholder="Enter your password" />
 
       <div class="button-group">
         <button id="loginBtn">Login</button>
-        <button id="registerBtn">Register</button>
+        <button id="register">Register</button>
       </div>
 
       <p id="error-message" class="error"></p>
@@ -32,11 +33,12 @@
     import { auth } from "./js/firebase-config.js";
     import {
       signInWithEmailAndPassword,
-      createUserWithEmailAndPassword
+      createUserWithEmailAndPassword,
+      updateProfile
     } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("registerBtn");
+    const registerBtn = document.getElementById("register");
 
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
@@ -57,12 +59,20 @@
     });
 
     registerBtn.addEventListener("click", async () => {
+      const name = document.getElementById("name").value.trim();
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
       errorMsg.textContent = "";
 
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Set displayName for Firebase user
+        await updateProfile(user, {
+          displayName: name
+        });
+
         window.location.href = "dashboard.html";
       } catch (error) {
         errorMsg.textContent = error.message;
