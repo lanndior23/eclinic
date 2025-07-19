@@ -16,48 +16,46 @@ onAuthStateChanged(auth, (user) => {
     currentUser = user;
     loadMessages();
   } else {
-    window.location.href = 'index.html';
+    window.location.href = "index.html"; // or login.html
   }
 });
+
 
 const loadMessages = () => {
   const chatRef = collection(db, "chats");
   const q = query(chatRef, orderBy("timestamp"));
 
-  onSnapshot(q, (snapshot) => {
-    chatBox.innerHTML = '';
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      const sender = data.sender === currentUser.email ? "You" : data.sender;
-      const msgClass = sender === "You" ? "your-msg" : "doctor-msg";
+ onSnapshot(q, (snapshot) => {
+  chatBox.innerHTML = "";
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const sender = data.sender === currentUser.email ? "You" : data.sender;
+    const msgClass = sender === "You" ? "your-msg" : "doctor-msg";
+    
+    const msgDiv = document.createElement("div");
+    msgDiv.className = "chat-message " + msgClass;
+    msgDiv.innerHTML = `<strong>${sender}:</strong> ${data.message}`;
+    chatBox.appendChild(msgDiv);
+  });
 
-      const msgDiv = document.createElement("div");
-      msgDiv.className = `chat-message ${msgClass}`;
-      msgDiv.innerHTML = `<strong>${sender}:</strong> ${data.message}`;
-      chatBox.appendChild(msgDiv);
-    });
-    chatBox.scrollTop = chatBox.scrollHeight;
+  chatBox.scrollTop = chatBox.scrollHeight;
   });
 };
 
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const message = chatInput.value.trim();
+
   if (!message) return;
+
+  console.log("Sending message:", message); // ✅ Add this
+  console.log("Current User:", currentUser?.email); // ✅ Add this
 
   await addDoc(collection(db, "chats"), {
     sender: currentUser.email,
     message,
     timestamp: serverTimestamp()
   });
-
-  setTimeout(() => {
-    addDoc(collection(db, "chats"), {
-      sender: "Dr. Bot",
-      message: "Thank you for your message. A doctor will respond shortly.",
-      timestamp: serverTimestamp()
-    });
-  }, 1000);
 
   chatInput.value = "";
 });
