@@ -168,7 +168,7 @@
 
 /* APPOINTMENT PAGE STYLES */
 .appointment-bg {
-  background: url	url('/assets/doctor.jpg') no-repeat center center fixed;
+  background: url	url("/assets/doctor.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
