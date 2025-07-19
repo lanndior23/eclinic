@@ -322,9 +322,10 @@ form button:hover {
 
 /* ADMIN DASHBOARD STYLES */
 .admin-bg {
-  background-image: url("/assets/admin.jpg") no-repeat center center fixed;
+  background: url("/assets/admin.jpg") no-repeat center center fixed;
   background-size: cover;
 }
+
 
 .dashboard-container {
   background-color: rgba(255, 255, 255, 0.95);
