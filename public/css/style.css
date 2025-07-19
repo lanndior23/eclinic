@@ -279,7 +279,7 @@ form button:hover {
 
 /* ADMIN DASHBOARD STYLES */
 .admin-bg {
-  background: url('/assets/admin.jpg') no-repeat center center fixed;
+  background-image: url("/assets/admin.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -322,7 +322,7 @@ form button:hover {
 
 /* PROFILE PAGE STYLES */
 .profile-bg {
-  background:	url('/assets/profile.jpg') no-repeat center center fixed;
+  background-image: url("/assets/profile.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
