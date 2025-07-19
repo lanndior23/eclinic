@@ -5,7 +5,6 @@ A digital health solution for Ghana – book doctor appointments and chat online
 - Patient login/register
 - Book appointments
 - Real-time doctor chat
-- Admin dashboard
 - Firebase hosting
 
 ## 📁 Tech Stack
