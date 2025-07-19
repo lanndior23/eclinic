@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Health eClinic Ghana – Login</title>
+  <title>Health eClinic Ghana – Auth</title>
   <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .hidden { display: none; }
+  </style>
 </head>
 <body class="auth-bg">
   <div class="overlay">
@@ -15,20 +18,25 @@
 
       <img src="/assets/Doctor-logo.png" alt="Doctor" class="banner" />
 
-       <input type="text" id="name" placeholder="Full Name" required />
-       <input type="username" id="username" placeholder="Enter your username" />
-      <input type="email" id="email" placeholder="Enter your email" />
-      <input type="password" id="password" placeholder="Enter your password" />
+      <!-- Shared Fields -->
+      <div id="register-fields">
+        <input type="text" id="name" placeholder="Full Name" />
+        <input type="text" id="username" placeholder="Username" />
+      </div>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
 
+      <!-- Buttons -->
       <div class="button-group">
-        <button id="loginBtn">Login</button>
-        <button id="register">Register</button>
+        <button id="actionBtn">Login</button>
+        <button id="toggleMode">Switch to Register</button>
       </div>
 
       <p id="error-message" class="error"></p>
     </div>
   </div>
 
+  <!-- Firebase Auth Logic -->
   <script type="module">
     import { auth } from "./js/firebase-config.js";
     import {
@@ -37,48 +45,65 @@
       updateProfile
     } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-    const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("register");
+    let isRegistering = false;
 
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
+    // Elements
+    const actionBtn = document.getElementById("actionBtn");
+    const toggleModeBtn = document.getElementById("toggleMode");
     const errorMsg = document.getElementById("error-message");
 
-    loginBtn.addEventListener("click", async () => {
+    const nameInput = document.getElementById("name");
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const registerFields = document.getElementById("register-fields");
+
+    // Toggle between Login/Register
+    toggleModeBtn.addEventListener("click", () => {
+      isRegistering = !isRegistering;
+
+      registerFields.style.display = isRegistering ? "block" : "none";
+      actionBtn.textContent = isRegistering ? "Register" : "Login";
+      toggleModeBtn.textContent = isRegistering ? "Switch to Login" : "Switch to Register";
+      errorMsg.textContent = "";
+    });
+
+    // Auth Action (Login or Register)
+    actionBtn.addEventListener("click", async () => {
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
       errorMsg.textContent = "";
 
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        errorMsg.textContent = error.message;
-        console.error("Login failed:", error);
+      if (isRegistering) {
+        const name = nameInput.value.trim();
+        const username = usernameInput.value.trim();
+
+        if (!name || !username) {
+          errorMsg.textContent = "Please enter full name and username.";
+          return;
+        }
+
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          await updateProfile(userCredential.user, {
+            displayName: name
+          });
+          window.location.href = "dashboard.html";
+        } catch (error) {
+          errorMsg.textContent = error.message;
+        }
+      } else {
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+          window.location.href = "dashboard.html";
+        } catch (error) {
+          errorMsg.textContent = error.message;
+        }
       }
     });
 
-    registerBtn.addEventListener("click", async () => {
-      const name = document.getElementById("name").value.trim();
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-      errorMsg.textContent = "";
-
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // Set displayName for Firebase user
-        await updateProfile(user, {
-          displayName: name
-        });
-
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        errorMsg.textContent = error.message;
-        console.error("Registration failed:", error);
-      }
-    });
+    // Hide register fields initially
+    registerFields.style.display = "none";
   </script>
 </body>
 </html>
