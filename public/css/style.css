@@ -10,10 +10,11 @@
     }
 
     /* BACKGROUND IMAGE */
-    body.auth-bg {
-      background: urlurl("/assets/hos.jpg") no-repeat center center fixed;
-      background-size: cover;
-    }
+body.auth-bg {
+  background: url("/assets/hos.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
 
     /* OVERLAY WITH BLUR AND TINT */
     .overlay {
