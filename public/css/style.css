@@ -169,8 +169,8 @@
 /* APPOINTMENT PAGE STYLES */
 .appointment-bg {
   background: linear-gradient(
-      rgba(0, 0, 0, 0.4), 
-      rgba(0, 0, 0, 0.4)
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
     ),
     url("/assets/doctor.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -183,7 +183,7 @@
 /* Form Styling */
 .form-container {
   backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.85); /* Light and clean without full transparency */
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 2rem;
   width: 90%;
   max-width: 500px;
@@ -217,12 +217,13 @@ form button:hover {
   background-color: #005f87;
 }
 
-/* Optional Message Styling */
+/* Message Text */
 .msg {
   font-size: 0.95rem;
   font-weight: bold;
   margin-top: 10px;
 }
+
 
 
 /* CHAT PAGE BACKGROUND */
