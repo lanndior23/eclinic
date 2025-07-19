@@ -2,105 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Health Articles - Health eClinic Ghana</title>
-  <link rel="stylesheet" href="css/style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Articles – Health eClinic Ghana</title>
+  <link rel="stylesheet" href="css/style.css" />
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #c5f6fa, #5dade2);
+      background: url("/assets/article.jpeg") no-repeat center center fixed;
+      background-size: cover;
       color: #023e8a;
     }
 
     .overlay {
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 3rem;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
     }
 
-    .articles-header {
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
       text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .articles-header h1 {
-      font-size: 2.5rem;
-      color: #0077b6;
-      margin-bottom: 10px;
-    }
-
-    .articles-header p {
-      font-size: 1.1rem;
+      margin-bottom: 2rem;
       color: #0077b6;
     }
 
-    .articles-container {
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .article-card {
-      background-color: #e0f7fa;
-      color: #023e8a;
+    .article {
+      background-color: #dff6ff;
       border-left: 6px solid #00b4d8;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .article-card h3 {
+    .article h2 {
       margin-top: 0;
       color: #0077b6;
     }
 
-    .article-card p {
-      color: #333;
+    .article p {
+      line-height: 1.6;
     }
 
-    .read-more {
-      color: #0096c7;
+    .article a {
+      color: #023e8a;
       text-decoration: underline;
-      font-weight: bold;
     }
 
-    .read-more:hover {
-      color: #005f73;
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #555;
     }
   </style>
 </head>
 <body>
   <div class="overlay">
-    <div class="articles-header">
-      <h1>Health Articles</h1>
-      <p>Helpful tips and wellness advice from Health eClinic Ghana</p>
-    </div>
+    <div class="container">
+      <h1>Latest Health Articles</h1>
 
-    <div class="articles-container">
-
-      <div class="article-card">
-        <h3>5 Simple Ways to Boost Your Immunity</h3>
-        <p>Discover how to naturally strengthen your immune system through nutrition, rest, and hydration.</p>
-        <a href="#" class="read-more">Read More</a>
+      <div class="article">
+        <h2>1. The Importance of Regular Checkups</h2>
+        <p>Regular medical checkups help detect health problems early, increasing the chances of successful treatment. From blood pressure to diabetes, early detection saves lives.</p>
+        <a href="https://www.who.int/news-room/fact-sheets/detail/noncommunicable-diseases" target="_blank">Read more</a>
       </div>
 
-      <div class="article-card">
-        <h3>Understanding High Blood Pressure</h3>
-        <p>Learn the causes of hypertension and how to manage it with smart lifestyle changes.</p>
-        <a href="#" class="read-more">Read More</a>
+      <div class="article">
+        <h2>2. Managing Diabetes Through Diet</h2>
+        <p>A balanced diet with low sugar, high fiber, and regular meals is key to managing type 2 diabetes. Avoid processed foods and sugary drinks for better control.</p>
+        <a href="https://www.cdc.gov/diabetes/managing/eat-well.html" target="_blank">Read more</a>
       </div>
 
-      <div class="article-card">
-        <h3>Protecting Your Mental Health</h3>
-        <p>Tips for staying mentally strong during stressful times and recognizing early warning signs.</p>
-        <a href="#" class="read-more">Read More</a>
+      <div class="article">
+        <h2>3. Mental Health: Signs You Shouldn’t Ignore</h2>
+        <p>Feeling overwhelmed, sad, or anxious for long periods may be a sign of mental health issues. Don’t wait—reach out to a doctor or counselor for help.</p>
+        <a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response" target="_blank">Read more</a>
       </div>
 
+      <div class="article">
+        <h2>4. Staying Hydrated in Hot Weather</h2>
+        <p>Dehydration can lead to headaches, fatigue, and confusion. Always carry water and drink at least 2 liters daily, especially in Ghana’s hot climate.</p>
+        <a href="https://www.cdc.gov/nutrition/data-statistics/plain-water-the-healthier-choice.html" target="_blank">Read more</a>
+      </div>
+
+      <div class="article">
+        <h2>5. Vaccinations: Protecting Yourself & Others</h2>
+        <p>Vaccines are a safe and effective way to protect against serious diseases. Stay up to date with your immunization schedule for your age group.</p>
+        <a href="https://www.who.int/health-topics/vaccines-and-immunization" target="_blank">Read more</a>
+      </div>
+
+      <p class="footer">Powered by Health eClinic Ghana</p>
     </div>
   </div>
 </body>
