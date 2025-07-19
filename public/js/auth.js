@@ -2,7 +2,8 @@
 import { auth } from "./firebase-config.js";
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 // Helper to show error
@@ -45,6 +46,23 @@ export async function register() {
   }
 }
 
+// Password reset function
+export async function resetPassword() {
+  const user = auth.currentUser;
+  if (user && user.email) {
+    try {
+      await sendPasswordResetEmail(auth, user.email);
+      alert("Reset link sent to your email.");
+    } catch (error) {
+      console.error("Error sending reset email:", error);
+      alert("Failed to send reset link: " + error.message);
+    }
+  } else {
+    alert("User email not available. Please log in again.");
+  }
+}
+
 // Make functions accessible from HTML
 window.login = login;
 window.register = register;
+window.resetPassword = resetPassword;
