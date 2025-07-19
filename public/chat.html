@@ -5,19 +5,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>eClinic Doctor Chat</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* BACKGROUND IMAGE */
+    body.chat-bg {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("/assets/chat.webp") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* DARK OVERLAY */
+    body.chat-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    /* CHAT CONTAINER */
+    .chat-container {
+      position: relative;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      max-width: 600px;
+      margin: 5rem auto;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    /* CHAT BOX */
+    #chat-box {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 10px;
+      background-color: #ffffffee;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    /* MESSAGE STYLES */
+    .chat-message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .your-msg {
+      background-color: #d1f7ff;
+      text-align: right;
+    }
+
+    .doctor-msg {
+      background-color: #e9ffe1;
+      text-align: left;
+    }
+
+    /* CHAT FORM */
+    #chat-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    #chat-form input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #chat-form button {
+      padding: 10px 20px;
+      font-weight: bold;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #chat-form button:hover {
+      background-color: #005f87;
+    }
+  </style>
 </head>
 <body class="chat-bg">
-  <div class="overlay">
-    <div class="chat-container">
-      <h2>Doctor Chat</h2>
-      <div id="chat-box"></div>
-      <form id="chat-form">
-        <input type="text" id="chat-input" placeholder="Type your message..." required />
-        <button type="submit">Send</button>
-      </form>
-    </div>
+  <div class="chat-container">
+    <h2>Doctor Chat</h2>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type your message..." required />
+      <button type="submit">Send</button>
+    </form>
   </div>
 
+  <!-- Firebase JS -->
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module">
     import { db, auth } from './js/firebase-config.js';
@@ -64,7 +164,8 @@
 
     chatForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const message = chatInput.value;
+      const message = chatInput.value.trim();
+      if (!message) return;
 
       await addDoc(collection(db, "chats"), {
         sender: currentUser.email,
@@ -72,7 +173,7 @@
         timestamp: serverTimestamp()
       });
 
-      // Simulated doctor response (basic bot)
+      // Simulated doctor response
       setTimeout(() => {
         addDoc(collection(db, "chats"), {
           sender: "Dr. Bot",
