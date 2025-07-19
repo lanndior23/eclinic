@@ -1,7 +1,8 @@
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
  
-  // Your web app's Firebase configuration
+// Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyA1-f_FvWAd1Howxu2tEE2hv6uL25jPaHI",
     authDomain: "eclinic-gh.firebaseapp.com",
@@ -12,6 +13,8 @@
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  export const auth = getAuth(app);
-  
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+export { db, auth };
