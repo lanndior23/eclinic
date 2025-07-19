@@ -168,11 +168,18 @@ body.auth-bg {
 }
 
 /* APPOINTMENT PAGE STYLES */
-body.auth-bg {
-  background: url("/public/assets/admin.jpg") no-repeat center center fixed;
+.appointment-bg {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("/public/assets/admin.jpg") no-repeat center center fixed;
   background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 
 /* Form Styling */
 .form-container {
