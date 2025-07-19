@@ -364,11 +364,18 @@ form button:hover {
   border: 1px solid #ccc;
 }
 
-/* PROFILE PAGE STYLES */
 .profile-bg {
-  background-image: url("/assets/profile.jpg") no-repeat center center fixed;
+  background: url("../assets/profile.jpg") no-repeat center center fixed;
   background-size: cover;
 }
+.profile-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 3rem auto;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.2);
+
 
 #user-info {
   background-color: rgba(255, 255, 255, 0.85);
