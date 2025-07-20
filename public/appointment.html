@@ -3,109 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>eClinic - Appointments</title>
+  <title>Book Appointment - eClinic</title>
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <style>
-    body.appointment-bg {
-      background: #e0f7fa;
-      font-family: Arial, sans-serif;
-    }
-
-    .tab-buttons {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .tab-buttons button {
-      margin: 5px;
-      padding: 10px 20px;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .form-container, .appointment-list {
-      max-width: 500px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      display: none;
-    }
-
-    .appointment-card {
-      background: #f9f9f9;
-      border-left: 4px solid #0077cc;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-    }
-
-    .msg {
-      color: green;
-      margin-top: 10px;
-    }
-
-    .active-tab {
-      display: block;
-    }
-  </style>
 </head>
 <body class="appointment-bg">
-
-  <div class="tab-buttons">
-    <button onclick="showTab('book')">Book Appointment</button>
-    <button onclick="showTab('view')">My Appointments</button>
+  <div class="nav-tabs">
+    <button onclick="showSection('form-section')">Book Appointment</button>
+    <button onclick="showSection('list-section')">My Appointments</button>
   </div>
 
-  <div id="book" class="form-container active-tab">
-    <h2>Book an Appointment</h2>
-    <form id="appointmentForm">
-      <input type="text" id="name" placeholder="Full Name" required />
-      <input type="email" id="email" placeholder="Email Address" required />
-      <input type="datetime-local" id="datetime" required />
-      <select id="doctor" required>
-        <option value="" disabled selected>Select Doctor</option>
-        <option value="Dr. Kofi Mensah">Dr. Kofi Mensah</option>
-        <option value="Dr. Ama Serwaa">Dr. Ama Serwaa</option>
-        <option value="Dr. Kwame Boakye">Dr. Kwame Boakye</option>
-        <option value="Dr. William Amoah">Dr. William Amoah</option>
-        <option value="Dr. Abigail Mensah">Dr. Abigail Mensah</option>
-      </select>
-      <textarea id="symptoms" placeholder="Symptoms or Message" required></textarea>
-      <button type="submit">Submit Appointment</button>
-      <p id="form-message" class="msg"></p>
-    </form>
+  <div id="form-section" class="section">
+    <div class="form-container">
+      <h2>Book an Appointment</h2>
+      <form id="appointmentForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <input type="datetime-local" id="datetime" required />
+        <select id="doctor" required>
+          <option value="" disabled selected>Select Doctor</option>
+          <option value="Dr. Kofi Mensah">Dr. Kofi Mensah</option>
+          <option value="Dr. Ama Serwaa">Dr. Ama Serwaa</option>
+          <option value="Dr. Kwame Boakye">Dr. Kwame Boakye</option>
+          <option value="Dr. William Amoah">Dr. William Amoah</option>
+          <option value="Dr. Abigail Mensah">Dr. Abigail Mensah</option>
+        </select>
+        <textarea id="symptoms" placeholder="Symptoms or Message" required></textarea>
+        <button type="submit">Submit Appointment</button>
+        <p id="form-message" class="msg"></p>
+      </form>
+    </div>
   </div>
 
-  <div id="view" class="appointment-list">
-    <h2>Your Appointments</h2>
-    <div id="appointmentListContainer"></div>
+  <div id="list-section" class="section" style="display: none;">
+    <div id="appointmentListContainer" class="appointment-list"></div>
   </div>
 
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module">
     import { db, auth } from './js/firebase-config.js';
     import {
-      collection,
-      addDoc,
-      deleteDoc,
-      doc,
-      query,
-      where,
-      onSnapshot,
-      serverTimestamp
+      collection, addDoc, deleteDoc, doc, query, where, onSnapshot, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     const form = document.getElementById("appointmentForm");
     const msg = document.getElementById("form-message");
     const appointmentList = document.getElementById("appointmentListContainer");
-
     let currentUser;
 
     onAuthStateChanged(auth, (user) => {
@@ -136,25 +80,23 @@
           symptoms,
           createdAt: serverTimestamp()
         });
-
-        msg.textContent = "✅ Appointment booked successfully!";
+        msg.textContent = "Appointment booked successfully!";
         form.reset();
       } catch (error) {
         console.error("Error adding appointment:", error);
-        msg.textContent = "❌ Failed to book appointment. Please try again.";
+        msg.textContent = "Failed to book appointment. Please try again.";
       }
     });
 
     function loadAppointments(uid) {
       const q = query(collection(db, "appointments"), where("uid", "==", uid));
       onSnapshot(q, (snapshot) => {
-        appointmentList.innerHTML = ""; // Clear old content
-
+        appointmentList.innerHTML = "";
         if (snapshot.empty) {
-          appointmentList.innerHTML = `<p>No appointments found.</p>`;
+          appointmentList.innerHTML = `<h3>Your Appointments</h3><p>No appointments found.</p>`;
           return;
         }
-
+        appointmentList.innerHTML = `<h3>Your Appointments</h3>`;
         snapshot.forEach((docSnap) => {
           const data = docSnap.data();
           const div = document.createElement("div");
@@ -173,14 +115,41 @@
       });
     }
 
-    // Tab switch logic
-    window.showTab = function(tabId) {
-      document.querySelectorAll(".form-container, .appointment-list").forEach((el) => {
-        el.classList.remove("active-tab");
-      });
-      document.getElementById(tabId).classList.add("active-tab");
-    }
+    window.showSection = function(sectionId) {
+      document.querySelectorAll(".section").forEach((sec) => sec.style.display = "none");
+      document.getElementById(sectionId).style.display = "block";
+    };
   </script>
 
+  <style>
+    .nav-tabs {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .nav-tabs button {
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .nav-tabs button:hover {
+      background-color: #005fa3;
+    }
+    .section {
+      padding: 20px;
+    }
+    .appointment-card {
+      background: #f9f9f9;
+      padding: 15px;
+      margin: 10px auto;
+      max-width: 500px;
+      border-radius: 10px;
+      border-left: 4px solid #0077cc;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
 </body>
 </html>
