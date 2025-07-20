@@ -1,4 +1,4 @@
-    * {
+* {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -391,4 +391,22 @@ form button:hover {
 
 #reset-password:hover, #logout:hover {
   background-color: #0077b6;
+}
+
+.appointment-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin: 10px auto;
+  max-width: 500px;
+  border-radius: 10px;
+  border-left: 4px solid #0077cc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.appointment-card button {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
