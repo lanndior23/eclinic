@@ -94,11 +94,18 @@ await addDoc(collection(db, "appointments"), {
   function loadAppointments(uid) {
     const q = query(collection(db, "appointments"), where("uid", "==", uid));
     onSnapshot(q, (snapshot) => {
-      appointmentList.innerHTML = "<h3>Your Appointments</h3>";
-      if (snapshot.empty) {
-        appointmentList.innerHTML += "<p>No appointments found.</p>";
-        return;
-      }
+appointmentList.innerHTML = ""; // Clear old content first
+
+if (snapshot.empty) {
+  appointmentList.innerHTML = `
+    <h3>Your Appointments</h3>
+    <p>No appointments found.</p>
+  `;
+  return;
+}
+
+appointmentList.innerHTML = `<h3>Your Appointments</h3>`;
+
 
       snapshot.forEach((docSnap) => {
         const data = docSnap.data();
