@@ -3,13 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Book Appointment - eClinic</title>
+  <title>eClinic - Appointments</title>
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <style>
+    body.appointment-bg {
+      background: #e0f7fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .tab-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .tab-buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .form-container, .appointment-list {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .appointment-card {
+      background: #f9f9f9;
+      border-left: 4px solid #0077cc;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    .msg {
+      color: green;
+      margin-top: 10px;
+    }
+
+    .active-tab {
+      display: block;
+    }
+  </style>
 </head>
 <body class="appointment-bg">
 
-  <div class="form-container">
+  <div class="tab-buttons">
+    <button onclick="showTab('book')">Book Appointment</button>
+    <button onclick="showTab('view')">My Appointments</button>
+  </div>
+
+  <div id="book" class="form-container active-tab">
     <h2>Book an Appointment</h2>
     <form id="appointmentForm">
       <input type="text" id="name" placeholder="Full Name" required />
@@ -29,104 +82,105 @@
     </form>
   </div>
 
-  <div id="appointmentListContainer" class="appointment-list"></div>
+  <div id="view" class="appointment-list">
+    <h2>Your Appointments</h2>
+    <div id="appointmentListContainer"></div>
+  </div>
 
   <script type="module" src="js/firebase-config.js"></script>
-<script type="module">
-  import { db, auth } from './js/firebase-config.js';
-  import {
-    collection,
-    addDoc,
-    deleteDoc,
-    doc,
-    query,
-    where,
-    onSnapshot,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+  <script type="module">
+    import { db, auth } from './js/firebase-config.js';
+    import {
+      collection,
+      addDoc,
+      deleteDoc,
+      doc,
+      query,
+      where,
+      onSnapshot,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-  const form = document.getElementById("appointmentForm");
-  const msg = document.getElementById("form-message");
-  const appointmentList = document.getElementById("appointmentListContainer");
+    const form = document.getElementById("appointmentForm");
+    const msg = document.getElementById("form-message");
+    const appointmentList = document.getElementById("appointmentListContainer");
 
-  let currentUser;
+    let currentUser;
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      currentUser = user;
-      document.getElementById("email").value = user.email;
-      loadAppointments(user.uid);
-    } else {
-      window.location.href = "index.html";
-    }
-  });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const datetime = document.getElementById("datetime").value;
-    const doctor = document.getElementById("doctor").value;
-    const symptoms = document.getElementById("symptoms").value;
-
-    try {
-await addDoc(collection(db, "appointments"), {
-  uid: currentUser.uid,
-  name,
-  email,
-  datetime,
-  doctor,
-  symptoms,
-  createdAt: serverTimestamp()
-}).then(() => {
-  console.log("Appointment added ✅");
-}).catch((error) => {
-  console.error("❌ Error:", error);
-});
-      msg.textContent = "Appointment booked successfully!";
-      form.reset();
-    } catch (error) {
-      console.error("Error adding appointment:", error);
-      msg.textContent = "Failed to book appointment. Please try again.";
-    }
-  });
-
-  function loadAppointments(uid) {
-    const q = query(collection(db, "appointments"), where("uid", "==", uid));
-    onSnapshot(q, (snapshot) => {
-appointmentList.innerHTML = ""; // Clear old content first
-
-if (snapshot.empty) {
-  appointmentList.innerHTML = `
-    <h3>Your Appointments</h3>
-    <p>No appointments found.</p>
-  `;
-  return;
-}
-
-appointmentList.innerHTML = `<h3>Your Appointments</h3>`;
-
-
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        const div = document.createElement("div");
-        div.className = "appointment-card";
-        div.innerHTML = `
-          <p><strong>${data.doctor}</strong></p>
-          <p>${new Date(data.datetime).toLocaleString()}</p>
-          <p>${data.symptoms}</p>
-          <button data-id="${docSnap.id}">Cancel</button>
-        `;
-        div.querySelector("button").addEventListener("click", async () => {
-          await deleteDoc(doc(db, "appointments", docSnap.id));
-        });
-        appointmentList.appendChild(div);
-      });
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        document.getElementById("email").value = user.email;
+        loadAppointments(user.uid);
+      } else {
+        window.location.href = "index.html";
+      }
     });
-  }
-</script>
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const datetime = document.getElementById("datetime").value;
+      const doctor = document.getElementById("doctor").value;
+      const symptoms = document.getElementById("symptoms").value;
+
+      try {
+        await addDoc(collection(db, "appointments"), {
+          uid: currentUser.uid,
+          name,
+          email,
+          datetime,
+          doctor,
+          symptoms,
+          createdAt: serverTimestamp()
+        });
+
+        msg.textContent = "✅ Appointment booked successfully!";
+        form.reset();
+      } catch (error) {
+        console.error("Error adding appointment:", error);
+        msg.textContent = "❌ Failed to book appointment. Please try again.";
+      }
+    });
+
+    function loadAppointments(uid) {
+      const q = query(collection(db, "appointments"), where("uid", "==", uid));
+      onSnapshot(q, (snapshot) => {
+        appointmentList.innerHTML = ""; // Clear old content
+
+        if (snapshot.empty) {
+          appointmentList.innerHTML = `<p>No appointments found.</p>`;
+          return;
+        }
+
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          const div = document.createElement("div");
+          div.className = "appointment-card";
+          div.innerHTML = `
+            <p><strong>${data.doctor}</strong></p>
+            <p>${new Date(data.datetime).toLocaleString()}</p>
+            <p>${data.symptoms}</p>
+            <button data-id="${docSnap.id}">Cancel</button>
+          `;
+          div.querySelector("button").addEventListener("click", async () => {
+            await deleteDoc(doc(db, "appointments", docSnap.id));
+          });
+          appointmentList.appendChild(div);
+        });
+      });
+    }
+
+    // Tab switch logic
+    window.showTab = function(tabId) {
+      document.querySelectorAll(".form-container, .appointment-list").forEach((el) => {
+        el.classList.remove("active-tab");
+      });
+      document.getElementById(tabId).classList.add("active-tab");
+    }
+  </script>
 
 </body>
-</html>
 </html>
