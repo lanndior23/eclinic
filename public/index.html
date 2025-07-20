@@ -8,6 +8,16 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <style>
     .hidden { display: none; }
+    .reset-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .reset-link a {
+      color: #0077cc;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body class="auth-bg">
@@ -33,6 +43,11 @@
         <button id="toggleMode">Switch to Register</button>
       </div>
 
+      <!-- Reset Password Link -->
+      <div class="reset-link" id="reset-link-container">
+        <a id="resetPasswordLink">Forgot Password?</a>
+      </div>
+
       <p id="error-message" class="error"></p>
     </div>
   </div>
@@ -43,7 +58,8 @@
     import {
       signInWithEmailAndPassword,
       createUserWithEmailAndPassword,
-      updateProfile
+      updateProfile,
+      sendPasswordResetEmail
     } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     let isRegistering = false;
@@ -51,6 +67,7 @@
     // Elements
     const actionBtn = document.getElementById("actionBtn");
     const toggleModeBtn = document.getElementById("toggleMode");
+    const resetPasswordLink = document.getElementById("resetPasswordLink");
     const errorMsg = document.getElementById("error-message");
 
     const nameInput = document.getElementById("name");
@@ -58,18 +75,20 @@
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const registerFields = document.getElementById("register-fields");
+    const resetLinkContainer = document.getElementById("reset-link-container");
 
-    // Toggle between Login/Register
+    // Toggle Login/Register
     toggleModeBtn.addEventListener("click", () => {
       isRegistering = !isRegistering;
 
       registerFields.style.display = isRegistering ? "block" : "none";
       actionBtn.textContent = isRegistering ? "Register" : "Login";
       toggleModeBtn.textContent = isRegistering ? "Switch to Login" : "Switch to Register";
+      resetLinkContainer.style.display = isRegistering ? "none" : "block";
       errorMsg.textContent = "";
     });
 
-    // Auth Action (Login or Register)
+    // Auth Action
     actionBtn.addEventListener("click", async () => {
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
@@ -103,8 +122,26 @@
       }
     });
 
-    // Hide register fields initially
+    // Reset Password Logic
+    resetPasswordLink.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      if (!email) {
+        errorMsg.textContent = "Please enter your email address above first.";
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        errorMsg.style.color = "green";
+        errorMsg.textContent = "Reset email sent. Please check your inbox.";
+      } catch (error) {
+        errorMsg.style.color = "red";
+        errorMsg.textContent = error.message;
+      }
+    });
+
+    // Initial state
     registerFields.style.display = "none";
+    resetLinkContainer.style.display = "block";
   </script>
 </body>
 </html>
