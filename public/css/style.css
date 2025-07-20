@@ -264,59 +264,41 @@ form button:hover {
 
 /* CHAT BOX */
 #chat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   height: 300px;
   overflow-y: auto;
-  border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 10px;
   background-color: #ffffffee;
   margin-bottom: 1rem;
+  color: #000;
+  border: 1px solid #ccc;
 }
 
-/* MESSAGE STYLES */
 .chat-message {
-  margin-bottom: 10px;
+  max-width: 70%;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
+  word-wrap: break-word;
+  display: inline-block;
 }
 
 .your-msg {
   background-color: #d1f7ff;
+  color: #000;
+  align-self: flex-end;
   text-align: right;
+  border-bottom-right-radius: 0;
 }
 
 .doctor-msg {
   background-color: #e9ffe1;
+  color: #000;
+  align-self: flex-start;
   text-align: left;
-}
-
-/* CHAT FORM */
-#chat-form {
-  display: flex;
-  gap: 10px;
-}
-
-#chat-form input {
-  flex: 1;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-#chat-form button {
-  padding: 10px 20px;
-  font-weight: bold;
-  background-color: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#chat-form button:hover {
-  background-color: #005f87;
+  border-bottom-left-radius: 0;
 }
 
 

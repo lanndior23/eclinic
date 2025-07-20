@@ -17,6 +17,7 @@ const chatInput = document.getElementById("chat-input");
 
 let currentUser;
 
+// Wait for auth user
 onAuthStateChanged(auth, (user) => {
   if (user) {
     currentUser = user;
@@ -26,10 +27,10 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+// Send message
 chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const message = chatInput.value.trim();
-
   if (message === "") return;
 
   await addDoc(collection(db, "chats"), {
@@ -39,24 +40,22 @@ chatForm.addEventListener("submit", async (e) => {
     timestamp: serverTimestamp()
   });
 
-  // Optional: Simulate doctor reply
+  // Fake doctor response after 2 sec
   setTimeout(() => {
     addDoc(collection(db, "chats"), {
       uid: currentUser.uid,
       sender: "doctor",
-      message: "Thank you for your message. A doctor will respond shortly.",
+      message: "Thanks, we’ll get back to you shortly.",
       timestamp: serverTimestamp()
     });
-  }, 1500);
+  }, 2000);
 
   chatInput.value = "";
 });
 
+// Listen for messages
 function listenToMessages() {
-  const q = query(
-    collection(db, "chats"),
-    orderBy("timestamp", "asc")
-  );
+  const q = query(collection(db, "chats"), orderBy("timestamp", "asc"));
 
   onSnapshot(q, (snapshot) => {
     chatBox.innerHTML = "";
@@ -68,14 +67,17 @@ function listenToMessages() {
 
         if (data.sender === "user") {
           div.classList.add("your-msg");
+          div.style.alignSelf = "flex-end";  // right
         } else {
           div.classList.add("doctor-msg");
+          div.style.alignSelf = "flex-start";  // left
         }
 
         div.textContent = data.message;
         chatBox.appendChild(div);
-        chatBox.scrollTop = chatBox.scrollHeight; // auto-scroll
       }
     });
+
+    chatBox.scrollTop = chatBox.scrollHeight;
   });
 }
