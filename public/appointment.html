@@ -70,23 +70,24 @@
     const symptoms = document.getElementById("symptoms").value;
 
     try {
-      await addDoc(collection(db, "appointments"), {
-        uid: currentUser.uid,
-        name,
-        email,
-        datetime,
-        doctor,
-        symptoms,
-        createdAt: serverTimestamp()
-      });
-
-      msg.textContent = "✅ Appointment booked successfully!";
-      msg.style.color = "green";
+await addDoc(collection(db, "appointments"), {
+  uid: currentUser.uid,
+  name,
+  email,
+  datetime,
+  doctor,
+  symptoms,
+  createdAt: serverTimestamp()
+}).then(() => {
+  console.log("Appointment added ✅");
+}).catch((error) => {
+  console.error("❌ Error:", error);
+});
+      msg.textContent = "Appointment booked successfully!";
       form.reset();
     } catch (error) {
-      msg.textContent = "❌ Error booking appointment.";
-      msg.style.color = "red";
-      console.error("Error:", error);
+      console.error("Error adding appointment:", error);
+      msg.textContent = "Failed to book appointment. Please try again.";
     }
   });
 
