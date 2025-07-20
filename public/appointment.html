@@ -29,6 +29,8 @@
     </form>
   </div>
 
+  <div id="appointmentListContainer" class="appointment-list"></div>
+
   <script type="module" src="js/firebase-config.js"></script>
 <script type="module">
   import { db, auth } from './js/firebase-config.js';
@@ -46,8 +48,7 @@
 
   const form = document.getElementById("appointmentForm");
   const msg = document.getElementById("form-message");
-  const appointmentList = document.createElement("div");
-  document.body.appendChild(appointmentList);
+  const appointmentList = document.getElementById("appointmentListContainer");
 
   let currentUser;
 
@@ -127,4 +128,5 @@ appointmentList.innerHTML = `<h3>Your Appointments</h3>`;
 </script>
 
 </body>
+</html>
 </html>
