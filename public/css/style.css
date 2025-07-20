@@ -393,18 +393,22 @@ form button:hover {
   background-color: #0077b6;
 }
 
-.appointment-list {
-  margin-top: 2rem;
-  padding: 1rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+.appointment-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin: 10px auto;
+  max-width: 500px;
+  border-radius: 10px;
+  border-left: 4px solid #0077cc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-left: 40px; /* Moves the card to the right */
 }
 
-.appointment-card {
-  background: #ffffff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
+.appointment-card button {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
