@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>eClinic Doctor Chat</title>
-  <link rel="stylesheet" href="css/style.css" />
+   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <style>
-    /* BACKGROUND IMAGE */
-    body.chat-bg {
+    body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url("/assets/chat.webp") no-repeat center center fixed;
@@ -16,8 +15,7 @@
       position: relative;
     }
 
-    /* DARK OVERLAY */
-    body.chat-bg::before {
+    body::before {
       content: "";
       position: absolute;
       top: 0; left: 0;
@@ -27,13 +25,11 @@
       z-index: 0;
     }
 
-    /* CHAT CONTAINER */
     .chat-container {
       position: relative;
       z-index: 1;
       background-color: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       max-width: 600px;
       margin: 5rem auto;
       padding: 2rem;
@@ -50,7 +46,7 @@
     }
 
     #chat-box {
-      height: 300px;
+      height: 350px;
       overflow-y: auto;
       border: 1px solid #ccc;
       padding: 1rem;
@@ -58,22 +54,36 @@
       background-color: #ffffffee;
       margin-bottom: 1rem;
       color: #000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .chat-message {
-      margin-bottom: 10px;
+      max-width: 70%;
       padding: 10px;
-      border-radius: 10px;
+      border-radius: 15px;
+      word-wrap: break-word;
+      position: relative;
     }
 
     .your-msg {
       background-color: #d1f7ff;
-      text-align: right;
+      align-self: flex-end;
+      text-align: left;
     }
 
     .doctor-msg {
       background-color: #e9ffe1;
+      align-self: flex-start;
       text-align: left;
+    }
+
+    .status {
+      font-size: 0.75rem;
+      color: gray;
+      margin-top: 5px;
+      text-align: right;
     }
 
     #chat-form {
@@ -81,7 +91,7 @@
       gap: 10px;
     }
 
-    #chat-form input {
+    #chat-input {
       flex: 1;
       padding: 10px;
       font-size: 1rem;
@@ -97,7 +107,6 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
 
     #chat-form button:hover {
@@ -105,7 +114,7 @@
     }
   </style>
 </head>
-<body class="chat-bg">
+<body>
   <div class="chat-container">
     <h2>Doctor Chat</h2>
     <div id="chat-box"></div>
@@ -115,7 +124,42 @@
     </form>
   </div>
 
-  <!-- Load Chat Script -->
-  <script type="module" src="/public/js/chat.js"></script>
+  <script>
+    const chatForm = document.getElementById("chat-form");
+    const chatBox = document.getElementById("chat-box");
+    const chatInput = document.getElementById("chat-input");
+
+    function appendMessage(content, type) {
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("chat-message", type);
+
+      const now = new Date();
+      const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      msgDiv.innerHTML = `
+        <div>${content}</div>
+        ${type === 'your-msg' ? `<div class="status">Sent &#10003; ${time}</div>` : ''}
+      `;
+
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = chatInput.value.trim();
+      if (message === "") return;
+
+      // Append your message
+      appendMessage(message, "your-msg");
+
+      // Simulated doctor reply (for testing)
+      setTimeout(() => {
+        appendMessage("Thanks for your message. We'll get back to you shortly.", "doctor-msg");
+      }, 1000);
+
+      chatInput.value = "";
+    });
+  </script>
 </body>
 </html>

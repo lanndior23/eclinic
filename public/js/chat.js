@@ -65,15 +65,28 @@ function listenToMessages() {
         const div = document.createElement("div");
         div.classList.add("chat-message");
 
+        let type;
         if (data.sender === "user") {
+          type = "your-msg";
           div.classList.add("your-msg");
-          div.style.alignSelf = "flex-end";  // right
+          div.style.alignSelf = "flex-end";
         } else {
+          type = "doctor-msg";
           div.classList.add("doctor-msg");
-          div.style.alignSelf = "flex-start";  // left
+          div.style.alignSelf = "flex-start";
         }
 
-        div.textContent = data.message;
+        // Get time string
+        let time = "";
+        if (data.timestamp && data.timestamp.toDate) {
+          const now = data.timestamp.toDate();
+          time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        div.innerHTML = `
+          <span>${data.message}</span>
+          ${type === 'your-msg' && time ? `<div class="status">Sent &#10003; ${time}</div>` : ''}
+        `;
         chatBox.appendChild(div);
       }
     });
