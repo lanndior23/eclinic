@@ -81,6 +81,7 @@
         await addDoc(collection(db, "appointments"), {
           uid: currentUser.uid,
           name,
+          phone,
           email,
           datetime,
           doctor,
