@@ -2,7 +2,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
 
     body, html {
       height: 100%;
@@ -247,19 +246,24 @@ form button:hover {
   z-index: 0;
 }
 
-/* CHAT CONTAINER - GLASSMORPHISM STYLE */
 .chat-container {
-  position: relative;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+  max-height: 90vh;
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 1.5rem;
+  border-radius: 20px;
+
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  max-width: 600px;
-  margin: 5rem auto;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
 }
 
 /* CHAT BOX */
@@ -300,6 +304,7 @@ form button:hover {
   text-align: left;
   border-bottom-left-radius: 0;
 }
+
 
 
 /* ADMIN DASHBOARD STYLES */
