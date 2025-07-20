@@ -8,14 +8,17 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 </head>
 <body class="appointment-bg">
-  <div class="nav-tabs">
-    <button onclick="showSection('form-section')">Book Appointment</button>
-    <button onclick="showSection('list-section')">My Appointments</button>
-  </div>
+  <div class="form-container">
+    <h2>Appointments</h2>
 
-  <div id="form-section" class="section">
-    <div class="form-container">
-      <h2>Book an Appointment</h2>
+    <!-- Navigation Buttons Inside Container -->
+    <div class="nav-tabs">
+      <button onclick="showSection('form-section')">Book Appointment</button>
+      <button onclick="showSection('list-section')">My Appointments</button>
+    </div>
+
+    <!-- Appointment Booking Form -->
+    <div id="form-section" class="section">
       <form id="appointmentForm">
         <input type="text" id="name" placeholder="Full Name" required />
         <input type="email" id="email" placeholder="Email Address" required />
@@ -33,12 +36,14 @@
         <p id="form-message" class="msg"></p>
       </form>
     </div>
+
+    <!-- Appointments List -->
+    <div id="list-section" class="section" style="display: none;">
+      <div id="appointmentListContainer" class="appointment-list"></div>
+    </div>
   </div>
 
-  <div id="list-section" class="section" style="display: none;">
-    <div id="appointmentListContainer" class="appointment-list"></div>
-  </div>
-
+  <!-- Firebase & Script -->
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module">
     import { db, auth } from './js/firebase-config.js';
@@ -121,10 +126,11 @@
     };
   </script>
 
+  <!-- Styling -->
   <style>
     .nav-tabs {
       text-align: center;
-      margin-top: 20px;
+      margin: 20px 0;
     }
     .nav-tabs button {
       padding: 10px 20px;
@@ -139,7 +145,7 @@
       background-color: #005fa3;
     }
     .section {
-      padding: 20px;
+      padding: 20px 0;
     }
     .appointment-card {
       background: #f9f9f9;
