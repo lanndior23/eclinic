@@ -1,7 +1,8 @@
-* {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
 
     body, html {
       height: 100%;
@@ -246,65 +247,77 @@ form button:hover {
   z-index: 0;
 }
 
+/* CHAT CONTAINER - GLASSMORPHISM STYLE */
 .chat-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 80vh;
-  max-height: 90vh;
-  max-width: 600px;
-  margin: 5rem auto;
-  padding: 1.5rem;
-  border-radius: 20px;
-
+  position: relative;
+  z-index: 1;
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem;
+  border-radius: 15px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-}
-
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* CHAT BOX */
 #chat-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   height: 300px;
   overflow-y: auto;
+  border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 10px;
   background-color: #ffffffee;
   margin-bottom: 1rem;
-  color: #000;
-  border: 1px solid #ccc;
 }
 
+/* MESSAGE STYLES */
 .chat-message {
-  max-width: 70%;
+  margin-bottom: 10px;
   padding: 10px;
-  border-radius: 15px;
-  word-wrap: break-word;
-  display: inline-block;
+  border-radius: 10px;
 }
 
 .your-msg {
   background-color: #d1f7ff;
-  color: #000;
-  align-self: flex-end;
   text-align: right;
-  border-bottom-right-radius: 0;
 }
 
 .doctor-msg {
   background-color: #e9ffe1;
-  color: #000;
-  align-self: flex-start;
   text-align: left;
-  border-bottom-left-radius: 0;
 }
 
+/* CHAT FORM */
+#chat-form {
+  display: flex;
+  gap: 10px;
+}
+
+#chat-form input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#chat-form button {
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#chat-form button:hover {
+  background-color: #005f87;
+}
 
 
 /* ADMIN DASHBOARD STYLES */
@@ -352,7 +365,7 @@ form button:hover {
 }
 
 .profile-bg {
-  background: url("/assets/profile.jpg") no-repeat center center fixed;
+  background: url("../assets/profile.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -378,24 +391,4 @@ form button:hover {
 
 #reset-password:hover, #logout:hover {
   background-color: #0077b6;
-}
-
-.appointment-card {
-  background: #f9f9f9;
-  padding: 15px;
-  margin: 10px auto;
-  max-width: 500px;
-  border-radius: 10px;
-  border-left: 4px solid #0077cc;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin-left: 40px; /* Moves the card to the right */
-}
-
-.appointment-card button {
-  background-color: #ff4d4d;
-  border: none;
-  padding: 5px 10px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
 }
