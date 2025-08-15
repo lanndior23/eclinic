@@ -15,9 +15,10 @@ A digital health solution for Ghana – book doctor appointments and chat online
 https://eclinic-gh.web.app
 
 ## 📸 Screenshots
-![Image](image.png)
+
 
 ## 🧠 Author
+
 
 
 
