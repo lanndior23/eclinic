@@ -4,54 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>eClinic Doctor Chat</title>
-   <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-png" href="assets/favicon.png" />
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url("/assets/chat.webp") no-repeat center center fixed;
+      background: url("/assets/chat.jpg") no-repeat center center fixed;
       background-size: cover;
       position: relative;
     }
 
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 0;
-    }
-
+    /* CHAT CONTAINER */
     .chat-container {
       position: relative;
       z-index: 1;
-      background-color: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      max-width: 600px;
-      margin: 5rem auto;
+      background: #fff; /* solid clean background */
+      max-width: 650px;
+      margin: 4rem auto;
       padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+      border-top: 6px solid #c50909; /* bold red accent bar */
+      color: #222;
+      animation: fadeInUp 0.8s ease forwards;
+      transform: translateY(30px);
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 1rem;
-      color: #fff;
+      margin-bottom: 1.5rem;
+      color: #c50909;
+      font-size: 1.8rem;
+      font-weight: bold;
     }
 
+    /* CHAT BOX */
     #chat-box {
       height: 350px;
       overflow-y: auto;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       padding: 1rem;
-      border-radius: 10px;
-      background-color: #ffffffee;
+      border-radius: 12px;
+      background-color: #fdfdfd;
       margin-bottom: 1rem;
       color: #000;
       display: flex;
@@ -59,33 +66,37 @@
       gap: 10px;
     }
 
+    /* MESSAGES */
     .chat-message {
       max-width: 70%;
-      padding: 10px;
+      padding: 10px 14px;
       border-radius: 15px;
       word-wrap: break-word;
-      position: relative;
+      font-size: 0.95rem;
     }
 
     .your-msg {
-      background-color: #d1f7ff;
+      background: #ffd6d6;
+      color: #000;
       align-self: flex-end;
-      text-align: left;
+      border: 1px solid #f5b5b5;
     }
 
     .doctor-msg {
-      background-color: #e9ffe1;
+      background: #fff2f2;
+      color: #111;
       align-self: flex-start;
-      text-align: left;
+      border: 1px solid #f3d1d1;
     }
 
     .status {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: gray;
-      margin-top: 5px;
+      margin-top: 4px;
       text-align: right;
     }
 
+    /* CHAT FORM */
     #chat-form {
       display: flex;
       gap: 10px;
@@ -102,15 +113,17 @@
     #chat-form button {
       padding: 10px 20px;
       font-weight: bold;
-      background-color: #0077b6;
+      background: linear-gradient(135deg, #c50909, #a00707);
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     #chat-form button:hover {
-      background-color: #005f87;
+      background: linear-gradient(135deg, #a00707, #7a0505);
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -150,12 +163,10 @@
       const message = chatInput.value.trim();
       if (message === "") return;
 
-      // Append your message
       appendMessage(message, "your-msg");
 
-      // Simulated doctor reply (for testing)
       setTimeout(() => {
-        appendMessage("Thanks for your message. We'll get back to you shortly.", "doctor-msg");
+        appendMessage("💬 Thanks for your message. A doctor will get back to you shortly.", "doctor-msg");
       }, 1000);
 
       chatInput.value = "";
@@ -163,3 +174,4 @@
   </script>
 </body>
 </html>
+

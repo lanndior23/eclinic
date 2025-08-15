@@ -5,78 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Health Articles – Health eClinic Ghana</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-png" href="assets/favicon.png" />
 
   <style>
+    /* GLOBAL STYLES */
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Segoe UI", Roboto, sans-serif;
       background: url("assets/article.jpeg") no-repeat center center fixed;
       background-size: cover;
-      color: #023e8a;
+      color: #1a1a1a;
     }
 
     .overlay {
-      background-color: rgba(255, 255, 255, 0.92);
-      padding: 3rem 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 4rem 1.5rem;
       min-height: 100vh;
     }
 
     .container {
-      max-width: 950px;
+      max-width: 1000px;
       margin: auto;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       color: #0077b6;
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
+    /* ARTICLE CARD */
     .article {
-      background-color: #dff6ff;
+      background: #ffffff;
       border-left: 6px solid #00b4d8;
-      padding: 1.5rem;
+      padding: 1.8rem;
       margin-bottom: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease-in-out;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .article:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
     .article h2 {
       margin-top: 0;
-      color: #0077b6;
+      margin-bottom: 0.8rem;
+      color: #023e8a;
+      font-size: 1.5rem;
     }
 
     .article p {
-      line-height: 1.7;
+      line-height: 1.8;
       font-size: 1rem;
+      color: #444;
     }
 
     .article a {
       display: inline-block;
-      margin-top: 0.5rem;
-      color: #023e8a;
-      font-weight: bold;
+      margin-top: 0.8rem;
+      color: #0077b6;
+      font-weight: 600;
       text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      background: #dff6ff;
+      transition: background 0.3s, color 0.3s;
     }
 
     .article a:hover {
-      color: #0077b6;
-      text-decoration: underline;
+      background: #00b4d8;
+      color: #fff;
     }
 
+    /* FOOTER */
     .footer {
       text-align: center;
-      margin-top: 3rem;
-      color: #555;
+      margin-top: 3.5rem;
+      color: #666;
       font-size: 0.95rem;
+      border-top: 1px solid #ddd;
+      padding-top: 1.5rem;
     }
   </style>
 </head>
@@ -85,50 +100,49 @@
     <div class="container">
       <h1>Latest Health Articles</h1>
 
-<div class="article">
-  <h2>1. The Importance of Regular Checkups</h2>
-  <p>Regular medical checkups help detect health problems early, increasing the chances of successful treatment. From blood pressure to cancer, early screening saves lives.</p>
-  <a href="https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-minute-health-screenings-in-underserved-populations/" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>1. The Importance of Regular Checkups</h2>
+        <p>Regular medical checkups help detect health problems early, increasing the chances of successful treatment. From blood pressure to cancer, early screening saves lives.</p>
+        <a href="https://newsnetwork.mayoclinic.org/discussion/mayo-clinic-minute-health-screenings-in-underserved-populations/" target="_blank">Read more</a>
+      </div>
 
-<div class="article">
-  <h2>2. Managing Diabetes Through Diet</h2>
-  <p>A balanced diet with low sugar, high fiber, and regular meals is key to managing type 2 diabetes. Avoid processed foods and sugary drinks for better control.</p>
-  <a href="https://www.diabetes.org/healthy-living/recipes-nutrition" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>2. Managing Diabetes Through Diet</h2>
+        <p>A balanced diet with low sugar, high fiber, and regular meals is key to managing type 2 diabetes. Avoid processed foods and sugary drinks for better control.</p>
+        <a href="https://www.diabetes.org/healthy-living/recipes-nutrition" target="_blank">Read more</a>
+      </div>
 
-<div class="article">
-  <h2>3. Mental Health: Signs You Shouldn’t Ignore</h2>
-  <p>Feeling overwhelmed, sad, or anxious for long periods may be a sign of mental health issues. Don’t wait—reach out to a doctor or counselor for help.</p>
-  <a href="https://www.nimh.nih.gov/health/topics" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>3. Mental Health: Signs You Shouldn’t Ignore</h2>
+        <p>Feeling overwhelmed, sad, or anxious for long periods may be a sign of mental health issues. Don’t wait—reach out to a doctor or counselor for help.</p>
+        <a href="https://www.nimh.nih.gov/health/topics" target="_blank">Read more</a>
+      </div>
 
-<div class="article">
-  <h2>4. Staying Hydrated in Hot Weather</h2>
-  <p>Dehydration can lead to headaches, fatigue, and confusion. Always carry water and drink at least 2 liters daily, especially in Ghana’s hot climate.</p>
-  <a href="https://www.healthline.com/nutrition/7-health-benefits-of-water" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>4. Staying Hydrated in Hot Weather</h2>
+        <p>Dehydration can lead to headaches, fatigue, and confusion. Always carry water and drink at least 2 liters daily, especially in Ghana’s hot climate.</p>
+        <a href="https://www.healthline.com/nutrition/7-health-benefits-of-water" target="_blank">Read more</a>
+      </div>
 
-<div class="article">
-  <h2>5. Vaccinations: Protecting Yourself & Others</h2>
-  <p>Vaccines are a safe and effective way to protect against serious diseases. Stay up to date with your immunization schedule for your age group.</p>
-  <a href="https://www.cdc.gov/vaccines/index.html" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>5. Vaccinations: Protecting Yourself & Others</h2>
+        <p>Vaccines are a safe and effective way to protect against serious diseases. Stay up to date with your immunization schedule for your age group.</p>
+        <a href="https://www.cdc.gov/vaccines/index.html" target="_blank">Read more</a>
+      </div>
 
-<div class="article">
-  <h2>6. Understanding Hypertension in Ghana</h2>
-  <p>High blood pressure is a growing health concern in Ghana. Learn the risk factors, signs, and how to manage it through lifestyle changes and regular monitoring.</p>
-  <a href="https://www.cdc.gov/high-blood-pressure/about/index.html" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>6. Understanding Hypertension in Ghana</h2>
+        <p>High blood pressure is a growing health concern in Ghana. Learn the risk factors, signs, and how to manage it through lifestyle changes and regular monitoring.</p>
+        <a href="https://www.cdc.gov/high-blood-pressure/about/index.html" target="_blank">Read more</a>
+      </div>
 
-<div class="article">
-  <h2>7. Maternal Health and Safe Delivery</h2>
-  <p>Maternal health is crucial for both mother and baby. Regular antenatal visits, good nutrition, and skilled delivery care reduce the risks of complications.</p>
-  <a href="https://www.who.int/news-room/fact-sheets/detail/maternal-mortality" target="_blank">Read more</a>
-</div>
+      <div class="article">
+        <h2>7. Maternal Health and Safe Delivery</h2>
+        <p>Maternal health is crucial for both mother and baby. Regular antenatal visits, good nutrition, and skilled delivery care reduce the risks of complications.</p>
+        <a href="https://www.who.int/news-room/fact-sheets/detail/maternal-mortality" target="_blank">Read more</a>
+      </div>
 
-
-      <p class="footer">Powered by Health eClinic Ghana</p>
+      <p class="footer">Powered by <strong>Health eClinic Ghana</strong></p>
     </div>
   </div>
 </body>
