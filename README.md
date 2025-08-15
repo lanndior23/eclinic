@@ -18,5 +18,5 @@ https://eclinic-86417.web.app
 ![Image](image.png)
 
 ## 🧠 Author
-William Amoah
+
 
