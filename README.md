@@ -1,4 +1,4 @@
-# Health eClinic 
+#  🌿 Health eClinic 
 A digital health solution for Ghana – book doctor appointments and chat online.
 
 ## 🚀 Features
@@ -18,6 +18,7 @@ https://eclinic-gh.web.app
 
 
 ## 🧠 Author
+
 
 
 
