@@ -3,14 +3,15 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
  
 // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyA1-f_FvWAd1Howxu2tEE2hv6uL25jPaHI",
-    authDomain: "eclinic-gh.firebaseapp.com",
-    projectId: "eclinic-gh",
-    storageBucket: "eclinic-gh.firebasestorage.app",
-    messagingSenderId: "327690766921",
-    appId: "1:327690766921:web:b78b74e98fd8298be8cd98"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyAe4yvjiQEG4OL8oEj6n7d0zv_TdG4QYR8",
+  authDomain: "eclinic-86417.firebaseapp.com",
+  projectId: "eclinic-86417",
+  storageBucket: "eclinic-86417.firebasestorage.app",
+  messagingSenderId: "740126833680",
+  appId: "1:740126833680:web:df7b96e063ce8384fd1e95",
+  measurementId: "G-2S31XEPJV5"
+};
 
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
